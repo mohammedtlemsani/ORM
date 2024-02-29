@@ -32,6 +32,9 @@ public class JpaHibernateApplication implements CommandLineRunner {
 		patientRepository.save(new Patient(8, "Hassan", new Date(2005, 12, 28), true, 7));
 		patientRepository.save(new Patient(9, "Leila", new Date(1992, 7, 18), false, 13));
 		patientRepository.save(new Patient(10, "Omar", new Date(1978, 3, 30), true, 16));
+		//System.out.println(patientRepository.search(9));
+		//patientRepository.updatePatientNom(9,"LAILA");
+		patientRepository.deletePatientById(9);
 		List<Patient> patients= patientRepository.findAll();
 		patients.forEach(patient -> {
 			System.out.println(patient.toString());
