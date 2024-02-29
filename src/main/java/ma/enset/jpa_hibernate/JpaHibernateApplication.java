@@ -10,6 +10,7 @@ import org.springframework.cache.support.NullValue;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootApplication
 public class JpaHibernateApplication implements CommandLineRunner {
@@ -34,6 +35,12 @@ public class JpaHibernateApplication implements CommandLineRunner {
 		List<Patient> patients= patientRepository.findAll();
 		patients.forEach(patient -> {
 			System.out.println(patient.toString());
+		});
+		Patient patient = patientRepository.findById(Long.valueOf(1)).get();
+		System.out.println(patient.toString());
+		List<Patient> patients1 = patientRepository.findByNomContains("med");
+		patients1.forEach(patient1 -> {
+			System.out.println(patient1.toString());
 		});
 	}
 }
