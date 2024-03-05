@@ -7,10 +7,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.support.NullValue;
+import org.springframework.context.annotation.Bean;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 @SpringBootApplication
 public class JpaHibernateApplication implements CommandLineRunner {
@@ -22,17 +24,18 @@ public class JpaHibernateApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		//System.out.println(patientRepository.search(9));
-		//patientRepository.updatePatientNom(9,"LAILA");
-/*		List<Patient> patients= patientRepository.findAll();
-		patients.forEach(patient -> {
-			System.out.println(patient.toString());
-		});
-		Patient patient = patientRepository.findById(Long.valueOf(1)).get();
-		System.out.println(patient.toString());
-		List<Patient> patients1 = patientRepository.findByNomContains("med");
-		patients1.forEach(patient1 -> {
-			System.out.println(patient1.toString());
-		});
-	*/}
+
+	}
+	@Bean
+	CommandLineRunner start(PatientRepository patientRepository){
+		return args -> {
+			Stream.of("hamid","mohammed","oussama").forEach(name->{
+				Patient p = new Patient();
+				p.setNom(name);
+				p.setDateNaissance(new Date());
+				p.setMalade(true);
+				patientRepository.save(p);
+			});
+		};
+	}
 }
