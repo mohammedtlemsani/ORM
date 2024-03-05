@@ -6,16 +6,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Collection;
-import java.util.Date;
+
 @Entity
-@Data @AllArgsConstructor @NoArgsConstructor
-public class Patient {
+@Data@AllArgsConstructor@NoArgsConstructor
+public class Medecin {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nom;
-    private Date dateNaissance;
-    private boolean malade;
-    private int score;
-    @OneToMany(mappedBy = "patient",fetch = FetchType.LAZY)
+    private String specialite;
+    @OneToMany(mappedBy = "medecin",fetch = FetchType.LAZY)
     private Collection<RendezVous> rendezVous;
 }
